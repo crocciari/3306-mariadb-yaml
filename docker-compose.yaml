@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mariadb:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: ca-mariadb
+    networks: 
+      - minha-rede
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: teste
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../../.mariadb/mariadb_data:/var/lib/mysql
+
+networks:
+  minha-rede:
+    external:
+      name: minha-rede
+
+volumes:
+  mariadb_data:
